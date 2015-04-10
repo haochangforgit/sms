@@ -14,6 +14,7 @@
 		<!-- login-page:默认指定的登录页面. authentication-failure-url:出错后跳转页面. default-target-url:成功登陆后跳转页面 -->
 		<security:form-login login-page="/auth/login.go"  />
 		
+		<!--  -->
 		<!-- filters="none" 不拦截这些资源-->
 		<security:intercept-url pattern="/static/**" filters="none" />
 		<!-- 不拦截登录页面 -->
