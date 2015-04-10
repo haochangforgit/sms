@@ -14,6 +14,8 @@
 		<!-- login-page:默认指定的登录页面. authentication-failure-url:出错后跳转页面. default-target-url:成功登陆后跳转页面 -->
 		<security:form-login login-page="/auth/login.go"  />
 		
+		<!-- filters="none" 不拦截这些资源-->
+		<security:intercept-url pattern="/static/**" filters="none" />
 		<!-- 不拦截登录页面 -->
 		<security:intercept-url pattern="/auth/login.go*" filters="none" />
 		<!-- 允许管理员权限访问 -->
@@ -23,9 +25,7 @@
 		<!-- 允许所有人访问 -->
 		<security:intercept-url pattern="/**" access="ROLE_USER,ROLE_ADMIN" />
 		
-		<!-- filters="none" 不拦截这些资源-->
-		<security:intercept-url pattern="/static/**" filters="none" />
-		
+
 		<!--
 			max-sessions:允许用户帐号登录的次数。范例限制用户只能登录一次。
 			exception-if-maximum-exceeded:默认为false，此值表示：用户第二次登录时，前一次的登录信息都被清空。
