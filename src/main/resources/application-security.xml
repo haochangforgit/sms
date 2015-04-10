@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+			http://www.springframework.org/schema/security 
+			http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+			
+	<!--  Spring-Security 的配置 -->
+	<!-- <security:http auto-config="true" use-expressions="false" access-denied-page="/auth/login"> -->
+	<security:http auto-config="true" access-denied-page="/auth/denied.go" >
+		
+		<!-- 配置默认登录动作 -->
+		<!-- login-page:默认指定的登录页面. authentication-failure-url:出错后跳转页面. default-target-url:成功登陆后跳转页面 -->
+		<security:form-login login-page="/auth/login.go"  />
+		
+		<!-- 配置注销动作 -->
+		<!-- invalidate-session：指定在退出系统时是否要销毁Session。
+		     logout-success-url：退出系统后转向的URL。
+		     logout-url：指定了用于响应退出系统请求的URL。其默认值为：/j_spring_security_logout。
+		-->
+		<security:logout logout-success-url="/auth/login.go" invalidate-session="true" />
+		
+		<!-- 不拦截登录页面 -->
+		<security:intercept-url pattern="/auth/login.go*" filters="none" />
+		<!-- 允许管理员权限访问 -->
+		<security:intercept-url pattern="/auth/admin.go" access="ROLE_ADMIN" />
+		<!-- 允许匿名访问 -->
+		<security:intercept-url pattern="/auth/common.go" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+		<!-- 允许所有人访问 -->
+		<security:intercept-url pattern="/**" access="ROLE_USER,ROLE_ADMIN" />
+		
+		<!-- filters="none" 不拦截这些资源-->
+		<security:intercept-url pattern="/static/**" filters="none" />
+		
+		<!--
+			max-sessions:允许用户帐号登录的次数。范例限制用户只能登录一次。
+			exception-if-maximum-exceeded:默认为false，此值表示：用户第二次登录时，前一次的登录信息都被清空。
+			当exception-if-maximum-exceeded="true"时系统会拒绝第二次登录。
+		-->
+		<security:session-management invalid-session-url="/auth/sessionTimeout.go" >
+			<security:concurrency-control  error-if-maximum-exceeded="false" max-sessions="1" />
+		</security:session-management>
+
+	</security:http>
+	
+	
+	<!-- 配置认证管理 -->
+	<security:authentication-manager>
+<!-- 		<security:authentication-provider user-service-ref="userDetailsSecurityService">
+			<security:password-encoder ref="passwordEncoder" />
+		</security:authentication-provider> -->
+		<security:authentication-provider>
+			<security:password-encoder hash="md5" />
+			<security:jdbc-user-service data-source-ref="dataSource" />
+<!-- 			<security:user-service >
+				<security:user name="user" password="ee11cbb19052e40b07aac0ca060c23ee" authorities="ROLE_USER"/>
+			</security:user-service> -->
+			
+		</security:authentication-provider>
+		
+	</security:authentication-manager>
+
+	<!-- 对密码进行MD5编码 -->
+	<bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" >
+		<!-- <property name="ignorePasswordCase" value="true" /> -->
+		<property name="encodeHashAsBase64" value="false" />
+	</bean>
+
+	<!-- 自定义登录错误消息国际化资源-->
+ 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:messages_zh_CN" />
+	</bean>
+	
+</beans>

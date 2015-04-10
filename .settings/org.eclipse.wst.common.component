@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-    <wb-module deploy-name="SMS_platform">
+    <wb-module deploy-name="sms">
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <property name="context-root" value="SMS_platform"/>
-        <property name="java-output-path" value="/SMS_platform/target/classes"/>
+        <dependent-module archiveName="lighting-platform-base-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/lighting-platform-base/lighting-platform-base">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="lighting-platform-service-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/lighting-platform-service/lighting-platform-service">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <property name="java-output-path" value="/sms/target/classes"/>
+        <property name="context-root" value="sms"/>
     </wb-module>
 </project-modules>
