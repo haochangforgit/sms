@@ -14,13 +14,6 @@
 		<!-- login-page:默认指定的登录页面. authentication-failure-url:出错后跳转页面. default-target-url:成功登陆后跳转页面 -->
 		<security:form-login login-page="/auth/login.go"  />
 		
-		<!-- 配置注销动作 -->
-		<!-- invalidate-session：指定在退出系统时是否要销毁Session。
-		     logout-success-url：退出系统后转向的URL。
-		     logout-url：指定了用于响应退出系统请求的URL。其默认值为：/j_spring_security_logout。
-		-->
-		<security:logout logout-success-url="/auth/login.go" invalidate-session="true" />
-		
 		<!-- 不拦截登录页面 -->
 		<security:intercept-url pattern="/auth/login.go*" filters="none" />
 		<!-- 允许管理员权限访问 -->
@@ -39,8 +32,15 @@
 			当exception-if-maximum-exceeded="true"时系统会拒绝第二次登录。
 		-->
 		<security:session-management invalid-session-url="/auth/sessionTimeout.go" >
-			<security:concurrency-control  error-if-maximum-exceeded="false" max-sessions="1" />
+			<security:concurrency-control max-sessions="1" error-if-maximum-exceeded="false"/>
 		</security:session-management>
+		
+		<!-- 配置注销动作 -->
+		<!-- invalidate-session：指定在退出系统时是否要销毁Session。
+		     logout-success-url：退出系统后转向的URL。
+		     logout-url：指定了用于响应退出系统请求的URL。其默认值为：/j_spring_security_logout。
+		-->
+		<security:logout logout-success-url="/auth/login.go" invalidate-session="true" />
 
 	</security:http>
 	

@@ -20,7 +20,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <link rel="stylesheet" href="<%=basePath%>static/css/reset.css">
         <link rel="stylesheet" href="<%=basePath%>static/css/supersized.css">
         <link rel="stylesheet" href="<%=basePath%>static/css/style.css">
-
+		<script type="text/javascript">
+		</script>
     </head>
 
     <body>

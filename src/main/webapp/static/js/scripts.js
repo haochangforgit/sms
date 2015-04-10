@@ -11,25 +11,6 @@
 //             }
 //     }
 //   });
-$(document).ajaxComplete
-	(
-		function(event, xhr, settings)
-		{
-			alert(xhr.getResponseHeader("sessionstatus"));
-			if(xhr.getResponseHeader("sessionstatus")=="timeOut")
-			{  
-				if(xhr.getResponseHeader("loginPath"))
-				{
-					alert("会话过期，请重新登陆!");
-					window.location.replace(xhr.getResponseHeader("loginPath"));  
-				}
-				else
-				{  
-					alert("请求超时请重新登陆 !");  
-				}  
-			}
-		}
-	);
 jQuery(document).ready(function() {
 
     $('.page-container form').submit(function(){
