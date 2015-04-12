@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.lighting.platform.base.web.controller.BaseController;
 
 /***
- * µÇÂ¼°²È«¿ØÖÆÆ÷
+ * ç™»å½•å®‰å…¨æ§åˆ¶å™¨
  * @author changhao
  *
  */
@@ -28,7 +28,7 @@ public class LoginSecurityController extends BaseController
 	private Log logger = LogFactory.getLog(getClass());
 	
     /** 
-     * Ö¸ÏòµÇÂ¼Ò³Ãæ 
+     * æŒ‡å‘ç™»å½•é¡µé¢ 
      */  
     @RequestMapping(value = "/login.go")
     public String loginPageInit(@RequestParam(value = "error", required = false) boolean error , ModelMap model)
@@ -49,7 +49,7 @@ public class LoginSecurityController extends BaseController
     }
     
     /** 
-     * Ö¸¶¨ÎŞ·ÃÎÊ¶îÈ¨ÏŞÒ³Ãæ 
+     * æŒ‡å®šæ— è®¿é—®é¢æƒé™é¡µé¢ 
      *  
      * @return 
      */  
@@ -63,7 +63,7 @@ public class LoginSecurityController extends BaseController
 	
     
     /** 
-     * Ö¸¶¨ÎŞ·ÃÎÊ¶îÈ¨ÏŞÒ³Ãæ 
+     * æŒ‡å®šæ— è®¿é—®é¢æƒé™é¡µé¢ 
      *  
      * @return 
      */  
@@ -76,7 +76,7 @@ public class LoginSecurityController extends BaseController
     }
 	
     /** 
-     * Ö¸¶¨ÎŞ·ÃÎÊ¶îÈ¨ÏŞÒ³Ãæ 
+     * æŒ‡å®šæ— è®¿é—®é¢æƒé™é¡µé¢ 
      *  
      * @return 
      */  
@@ -92,10 +92,10 @@ public class LoginSecurityController extends BaseController
     @RequestMapping(value = "/sessionTimeout.go")
     public void sessionTimeout(HttpServletRequest request,HttpServletResponse response,ModelMap model) throws IOException
     {
-    	//»ñÈ¡context uri
+    	//è·å–context uri
     	String uri = request.getContextPath();
-    	//»ñÈ¡ÇëÇóÍ·
-    	//x-requested-with  XMLHttpRequest  //±íÃ÷ÊÇAJaxÒì²½ÇëÇó
+    	//è·å–è¯·æ±‚å¤´
+    	//x-requested-with  XMLHttpRequest  //è¡¨æ˜æ˜¯AJaxå¼‚æ­¥è¯·æ±‚
     	String requestHeader = request.getHeader("x-requested-with");
     	if(requestHeader != null && requestHeader.equalsIgnoreCase("XMLHttpRequest"))
     	{

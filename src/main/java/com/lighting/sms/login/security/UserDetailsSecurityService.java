@@ -42,8 +42,8 @@ public class UserDetailsSecurityService implements UserDetailsService
 		}
 		catch (Exception e)
 		{
-			logger.error(String.format("%s||获取用户权限错误",e.getMessage()));
-			throw new UsernameNotFoundException("用户名错误");
+			logger.error(String.format("%s||鐧婚檰閿欒",e.getMessage()));
+			throw new UsernameNotFoundException("鐢ㄦ埛鍚嶆垨瀵嗙爜閿欒");
 		}
 		
 		return userDetail;

@@ -1,7 +1,7 @@
 package com.lighting.sms.login.service;
 
 /**
- * 用户业务接口
+ * 鐢ㄦ埛涓氬姟鎺ュ彛
  * 
  * @author changhao
  *

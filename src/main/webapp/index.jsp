@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 <h2>Hello World!</h2>
 	<a href="${pageContext.request.contextPath}/auth/admin.go"><h2>welcome to admin.jsp</h2></a>
-	</br>
+
 	<a href="j_spring_security_logout">退出系统</a>
 	        <!-- Javascript -->
 </body>
@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$(document).ajaxComplete(function(event, xhr, settings){
 				alert(xhr.getResponseHeader("sessionstatus"));
 				if(xhr.getResponseHeader("sessionstatus")=="timeOut")
-				{  
+				{
 					if(xhr.getResponseHeader("loginPath"))
 					{
 						alert("会话过期，请重新登陆!");
