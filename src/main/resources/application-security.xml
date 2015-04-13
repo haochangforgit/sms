@@ -50,12 +50,6 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 
-	<!-- 对密码进行MD5编码 -->
-	<bean id="passwordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" >
-		<!-- <property name="ignorePasswordCase" value="true" /> -->
-		<property name="encodeHashAsBase64" value="false" />
-	</bean>
-
 	<!-- 自定义登录错误消息国际化资源-->
  	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basename" value="classpath:messages_zh_CN" />
