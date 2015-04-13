@@ -16,12 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.lighting.platform.base.web.controller.BaseController;
 
 /***
- * 登录安全控制器
+ * 登录控制器
  * @author changhao
  *
  */
 @Controller
-@RequestMapping("/auth")
 public class LoginSecurityController extends BaseController
 {
 	/*** log **/
@@ -31,64 +30,39 @@ public class LoginSecurityController extends BaseController
      * 指向登录页面 
      */  
     @RequestMapping(value = "/login.go")
-    public String loginPageInit(@RequestParam(value = "error", required = false) boolean error , ModelMap model)
-    {  
-        logger.debug("Received request to show login page");  
+    public String loginPageInit(@RequestParam(value = "error", required = false) boolean error ,String type, ModelMap model,HttpServletRequest request)
+    {
+    	//跟踪原有的客户端IP地址和原来客户端请求的服务器地址
+    	String forwarded = request.getHeader("x-forwarded-for");
+    	String requestIp = forwarded == null ? request.getRemoteAddr() : forwarded;
+    	
+        logger.debug(String.format("Received request to show login page [%s]", requestIp));
    
-        if (error == true)
-        {  
-            // Assign an error message  
-            model.put("error","You have entered an invalid username or password!");  
-        }
-        else
-        {  
-            model.put("error", "");  
-        }  
         return "/login";  
-   
     }
     
     /** 
-     * 指定无访问额权限页面 
-     *  
-     * @return 
+     * 登录成功
      */  
-    @RequestMapping(value = "/denied.go")
-    public String getDeniedPage()
-    {  
-        logger.debug("Received request to show denied page");  
+    @RequestMapping(value = "/loginSuccess.go")
+    public String loginSuccess(@RequestParam(value = "error", required = false) boolean error ,String type, ModelMap model,HttpServletRequest request)
+    {
+    	//跟踪原有的客户端IP地址和原来客户端请求的服务器地址
+    	String forwarded = request.getHeader("x-forwarded-for");
+    	String requestIp = forwarded == null ? request.getRemoteAddr() : forwarded;
+    	
+        logger.debug(String.format("Received request to show login page [%s]", requestIp));
    
-        return "/deniedpage";  
-    }  
-	
-    
-    /** 
-     * 指定无访问额权限页面 
-     *  
-     * @return 
-     */  
-    @RequestMapping(value = "/common.go")
-    public String commonPageInit()
-    {  
-        logger.debug("Received request to show denied page");  
-   
-        return "/common";  
-    }
-	
-    /** 
-     * 指定无访问额权限页面 
-     *  
-     * @return 
-     */  
-    @RequestMapping(value = "/admin.go")
-    public String adminPageInit()
-    {  
-        logger.debug("Received request to show denied page");  
-   
-        return "/admin";  
+        return "/index";  
     }
     
-    
+    /***
+     * session 超时跳转页面
+     * @param request  请求
+     * @param response 响应
+     * @param model    mvc模型
+     * @throws IOException 写入失败或获取输出流失败后抛出
+     */
     @RequestMapping(value = "/sessionTimeout.go")
     public void sessionTimeout(HttpServletRequest request,HttpServletResponse response,ModelMap model) throws IOException
     {
@@ -109,7 +83,6 @@ public class LoginSecurityController extends BaseController
     	{
     		response.sendRedirect(String.format("%s/auth/login.go", uri));
     	}
-    	
     	//return "redirect:auth/login.go";
     }
 }

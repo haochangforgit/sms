@@ -38,7 +38,7 @@ public class UserDetailsSecurityService implements UserDetailsService
 			User loginUser = userService.getById(userId);
 			
 			userDetail = new org.springframework.security.core.userdetails.User
-					(loginUser.getId(), loginUser.getPassword(), true, true, false, true, authService.getGrantedAuthorityById(""));
+					(loginUser.getId(), loginUser.getPassword(), true, true, true, true, authService.getGrantedAuthorityById(""));
 		}
 		catch (Exception e)
 		{
