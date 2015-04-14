@@ -84,6 +84,7 @@ public class SecurityFilter extends AbstractSecurityInterceptor implements Filte
 	{
 		this.securityMetadataSource = securityMetadataSource;
 	}
+	
 
-
+	
 }

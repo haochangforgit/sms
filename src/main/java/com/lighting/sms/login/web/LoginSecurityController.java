@@ -42,9 +42,18 @@ public class LoginSecurityController extends BaseController
     }
     
     /** 
+     * 登录失败
+     */  
+    @RequestMapping(value = "/denied.go")
+    public String denied()
+    {
+        return "/denied";  
+    }
+    
+    /** 
      * 登录成功
      */  
-    @RequestMapping(value = "/loginSuccess.go")
+    @RequestMapping(value = "/undefined.go")
     public String loginSuccess(@RequestParam(value = "error", required = false) boolean error ,String type, ModelMap model,HttpServletRequest request)
     {
     	//跟踪原有的客户端IP地址和原来客户端请求的服务器地址
@@ -84,5 +93,11 @@ public class LoginSecurityController extends BaseController
     		response.sendRedirect(String.format("%s/auth/login.go", uri));
     	}
     	//return "redirect:auth/login.go";
+    }
+    
+    @RequestMapping("/a.go")
+    public String a()
+    {
+    	return "/a";
     }
 }

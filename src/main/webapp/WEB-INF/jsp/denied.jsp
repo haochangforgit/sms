@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-			admin.jsp
+			暂无权限
 </body>
 </html>

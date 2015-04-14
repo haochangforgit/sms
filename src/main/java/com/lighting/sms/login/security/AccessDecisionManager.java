@@ -33,7 +33,7 @@ public class AccessDecisionManager implements org.springframework.security.acces
 			return;
 		
 		logger.info(String.format("URL is %s",obj.toString()));
-		
+		//资源所需权限
 		Iterator<ConfigAttribute> it = attrs.iterator();
 		
 		while(it.hasNext())
@@ -42,15 +42,18 @@ public class AccessDecisionManager implements org.springframework.security.acces
 			
 			//String needRole = ((SecurityConfig)ca).getAttribute();
 			String role = attr.getAttribute();
-			
+			//authentication用户拥有权限
 			for (GrantedAuthority grantedAuthority : authentication.getAuthorities())
 			{
 				if(role.equals(grantedAuthority.getAuthority()))
+				{
+					//do something
 					return;
+				}
+					
 			}
 			
 		}
-		
 		throw new AccessDeniedException("No access");
 	}
 

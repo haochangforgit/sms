@@ -8,21 +8,17 @@
 			
 	<!--  Spring-Security 的配置 -->
 	<!-- <security:http auto-config="true" use-expressions="false" access-denied-page="/auth/login"> -->
-	<security:http auto-config="true" >
+	<security:http auto-config="true" access-denied-page="/denied.go">
 		
 		<!-- 配置默认登录动作 -->
 		<!-- login-page:默认指定的登录页面. authentication-failure-url:出错后跳转页面. default-target-url:成功登陆后跳转页面 -->
-		<security:form-login login-page="/login.go" default-target-url="/loginSuccess.go" />
+		<security:form-login login-page="/login.go" default-target-url="/index.go" />
 		
 		<!--  -->
 		<!-- filters="none" 不拦截这些资源-->
 		<security:intercept-url pattern="/static/**" filters="none" />
 		<!-- 不拦截登录页面 -->
 		<security:intercept-url pattern="/login.go*" filters="none" />
-		<!-- 允许管理员权限访问 -->
-		<security:intercept-url pattern="/admin.go" access="ROLE_ADMIN" />
-		<!-- 允许所有人访问 -->
-		<security:intercept-url pattern="/**" access="ROLE_USER,ROLE_ADMIN" />
 		
 		<!-- 配置注销动作 -->
 		<!-- invalidate-session：指定在退出系统时是否要销毁Session。
@@ -31,6 +27,7 @@
 		-->
 		<security:logout logout-success-url="/login.go" invalidate-session="true" />
 		
+		<!-- spring security 自定义过滤器引用,拦截在框架原有过滤器FILTER_SECURITY_INTERCEPTOR之前 -->
 		<security:custom-filter ref="securityFilter" before="FILTER_SECURITY_INTERCEPTOR" />
 		
 		<!--
@@ -44,7 +41,7 @@
 		
 	</security:http>
 	
-	<!-- spring security 自定义过滤器 拦截在框架原有过滤器之前 -->
+	<!-- spring security 自定义过滤器,拦截在框架原有过滤器之前 -->
 	<bean id="securityFilter" class="com.lighting.sms.login.security.SecurityFilter">
 	
 		<property name="authenticationManager" ref="authenticationManager" />
