@@ -53,7 +53,7 @@ public class LoginSecurityController extends BaseController
     	
         logger.debug(String.format("Received request to show login page [%s]", requestIp));
    
-        return "/index";  
+        return "/admin";  
     }
     
     /***

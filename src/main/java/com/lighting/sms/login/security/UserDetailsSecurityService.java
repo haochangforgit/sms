@@ -49,4 +49,15 @@ public class UserDetailsSecurityService implements UserDetailsService
 		return userDetail;
 	}
 	
+
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
+	}
+
+	public void setAuthService(IAuthService authService) {
+		this.authService = authService;
+	}
+	
+	
+	
 }
